@@ -78,8 +78,9 @@ func (app *App) initServer() {
 }
 
 func (app *App) Start() error {
-	app.deps.Logger.Debug("starting application")
+	app.deps.Logger.Info("starting application")
 
+	app.deps.Logger.Info("listening for incoming requests", "addr", app.server.Addr)
 	if err := app.server.ListenAndServe(); err != nil {
 		if !errors.Is(err, http.ErrServerClosed) {
 			app.deps.Logger.Fatal("fatal error during app execution", "err", err)
